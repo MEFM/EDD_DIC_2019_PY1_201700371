@@ -58,10 +58,10 @@ void ArbolPlaylist::buscarPlayList(string nombre) {
 NodoArbolBinario* ArbolPlaylist::buscarPlayList(string nombre, NodoArbolBinario* root) {
 	if (this->raiz == 0) {
 		cout << "No tienes listas de reproduccion disponibles." << endl;
-		return;
+		return NULL;
 	}
 	if (root == 0) {
-		return;
+		return NULL;
 	}
 	else {
 		char* palabra1 = (char*)nombre.c_str();
@@ -102,6 +102,13 @@ void ArbolPlaylist::menu_reportesRecorrido() {
 		cout << "2. Prefieres ver tus playlist en orden alfabetico?" << endl;
 		cout << "3. Lista desordenada" << endl;
 		cout << "4. Buscas una lista en especifico?" << endl;
+		cin >> seleccion;
+		switch (seleccion)
+		{
+
+		default:
+			break;
+		}
 
 	}
 }

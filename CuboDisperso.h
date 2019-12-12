@@ -65,9 +65,15 @@ public:
 	
 	//Insertar mes y ordenar año
 	void insertarAnoO(NodoDisperso* nuevo, NodoDisperso * cabeceraM) {
+		if (this->raiz == 0) {
 
+		}
 	}
-	void insertarMes(NodoDisperso* nuevo);
+	void insertarMes(NodoDisperso* nuevo) {
+		if (this->raiz == 0) {
+
+		}
+	}
 
 
 	//Crear cabeceras

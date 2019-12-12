@@ -149,6 +149,8 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Downloads\json.hpp" />
     <ClInclude Include="ArbolPlaylist.h" />
+    <ClInclude Include="Artista.h" />
+    <ClInclude Include="Cancion.h" />
     <ClInclude Include="CuboDisperso.h" />
     <ClInclude Include="ListaDoble.h" />
     <ClInclude Include="NodoArbolBinario.h" />
@@ -157,6 +159,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ArbolPlaylist.cpp" />
+    <ClCompile Include="Artista.cpp" />
+    <ClCompile Include="Cancion.cpp" />
     <ClCompile Include="CuboDisperso.cpp" />
     <ClCompile Include="NodoArbolBinario.cpp" />
     <ClCompile Include="stdafx.cpp">

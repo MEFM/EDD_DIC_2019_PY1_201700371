@@ -59,6 +59,7 @@ public:
 	void mostrarInformacion();
 	void graficar();
 	void insertarOrdenado(T informacion);
+
 };
 
 template<class T>
@@ -116,5 +117,19 @@ void ListaDoble<T>::graficar() {
 		WriteFile.close();
 		system("dot -Tpng listaDoble.dot -o lista.png");
 		system("lista.png");
+	}
+}
+
+template<class T>
+
+void ListaDoble<T>::insertarOrdenado(T informacion) {
+	if (this->primero == 0) {
+		this->primero = this->ultimo = new Nodo(informacion);
+	}
+	else {
+		char* palabra1;
+		char* palabra2;
+
+
 	}
 }

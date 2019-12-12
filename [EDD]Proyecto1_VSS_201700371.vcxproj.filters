@@ -36,6 +36,12 @@
     <ClInclude Include="..\..\..\..\Downloads\json.hpp">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="Artista.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Cancion.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -51,6 +57,12 @@
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="CuboDisperso.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Artista.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Cancion.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,4 +1,8 @@
-﻿  [EDD]Proyecto1_VSS_201700371.cpp
+﻿  ArbolPlaylist.cpp
+C:\Users\mynor\source\repos\[EDD]Proyecto1_VSS_201700371\[EDD]Proyecto1_VSS_201700371\ArbolPlaylist.cpp(111,3): warning C4065: la instrucción switch contiene etiquetas 'default' pero no etiquetas 'case'
+  Cancion.cpp
+  Generando código...
+C:\Users\mynor\source\repos\[EDD]Proyecto1_VSS_201700371\[EDD]Proyecto1_VSS_201700371\ArbolPlaylist.cpp(93): warning C4715: 'ArbolPlaylist::buscarPlayList': no todas las rutas de acceso de control devuelven un valor
   [EDD]Proyecto1_VSS_201700371.vcxproj -> C:\Users\mynor\source\repos\[EDD]Proyecto1_VSS_201700371\Debug\[EDD]Proyecto1_VSS_201700371.exe
   Set-Content : No se puede encontrar una parte de la ruta de acceso 
   'C:\WINDOWS\SysWOW64\WindowsPowerShell\v1.0\Debug\vcpkg.applocal.log'.
