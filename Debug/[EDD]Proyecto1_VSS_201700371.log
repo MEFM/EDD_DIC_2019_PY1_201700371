@@ -1,0 +1,27 @@
+﻿  [EDD]Proyecto1_VSS_201700371.cpp
+  [EDD]Proyecto1_VSS_201700371.vcxproj -> C:\Users\mynor\source\repos\[EDD]Proyecto1_VSS_201700371\Debug\[EDD]Proyecto1_VSS_201700371.exe
+  Set-Content : No se puede encontrar una parte de la ruta de acceso 
+  'C:\WINDOWS\SysWOW64\WindowsPowerShell\v1.0\Debug\vcpkg.applocal.log'.
+  En C:\proyecto1\vcpkg\scripts\buildsystems\msbuild\applocal.ps1: 12 Carácter: 5
+  +     Set-Content -Path $copiedFilesLog -Value "" -Encoding UTF8
+  +     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      + CategoryInfo          : ObjectNotFound: (C:\WINDOWS\SysW...kg.applocal.log:String) [Set-Content], DirectoryNotFo 
+     undException
+      + FullyQualifiedErrorId : GetContentWriterDirectoryNotFoundError,Microsoft.PowerShell.Commands.SetContentCommand
+   
+  Split-Path : No se puede enlazar el argumento al parámetro 'Path' porque es nulo.
+  En C:\proyecto1\vcpkg\scripts\buildsystems\msbuild\applocal.ps1: 40 Carácter: 39
+  +     $baseTargetBinaryDir = Split-Path $baseBinaryPath -parent
+  +                                       ~~~~~~~~~~~~~~~
+      + CategoryInfo          : InvalidData: (:) [Split-Path], ParameterBindingValidationException
+      + FullyQualifiedErrorId : ParameterArgumentValidationErrorNullNotAllowed,Microsoft.PowerShell.Commands.SplitPathCo 
+     mmand
+   
+  Split-Path : No se puede enlazar el argumento al parámetro 'Path' porque es nulo.
+  En C:\proyecto1\vcpkg\scripts\buildsystems\msbuild\applocal.ps1: 58 Carácter: 35
+  +     $targetBinaryDir = Split-Path $targetBinaryPath -parent
+  +                                   ~~~~~~~~~~~~~~~~~
+      + CategoryInfo          : InvalidData: (:) [Split-Path], ParameterBindingValidationException
+      + FullyQualifiedErrorId : ParameterArgumentValidationErrorNullNotAllowed,Microsoft.PowerShell.Commands.SplitPathCo 
+     mmand
+   
