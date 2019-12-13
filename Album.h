@@ -65,11 +65,24 @@ class Album
 private:
 	NodoAlbum* primero;
 	NodoAlbum* ultimo;
+	string nombre;
+	Cancion* canciones;
 public:
-	Album() {
+	Album(string nombre, Cancion* canciones) {
 		this->primero = 0;
 		this->ultimo = 0;
+		this->nombre = "";
+		this->canciones = canciones;
 	}
+
+	NodoAlbum* getPrimero();
+	NodoAlbum* getUltimo();
+	string getNombre();
+	Cancion* getCanciones();
+	void setPrimero();
+	void setUltimo();
+	void setNombre();
+	void setCanciones();
 
 	
 

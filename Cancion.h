@@ -9,9 +9,15 @@ class Cancion
 	private:
 		NodoCancion* siguiente;
 		NodoCancion* anterior;
+		//Para los dos tipos de instancia
 		string name;
+		//Para instancias de tipo libreria
 		string file;
 		float rating;
+
+		//Para instancias de tipo playlist
+		string album;
+	
 	public:
 		NodoCancion(string name, string file, float rating) {
 			this->siguiente = 0;
@@ -19,6 +25,12 @@ class Cancion
 			this->name = name;
 			this->file = file;
 			this->rating = rating;
+		}
+		NodoCancion(string name, string album) {
+			this->siguiente = 0;
+			this->anterior = 0;
+			this->name = name;
+			this->album = album;
 		}
 		NodoCancion* getSiguiente() {
 			return this->siguiente;
@@ -31,6 +43,9 @@ class Cancion
 		}
 		string getFile() {
 			return this->file;
+		}
+		string getAlgum() {
+			return this->album;
 		}
 		float getRating() {
 			return this->rating;
@@ -48,6 +63,9 @@ class Cancion
 		void setFile(string archivo) {
 			this->file = archivo;
 		}
+		void setAlbum(string album) {
+			this->album = album;
+		}
 		void setRating(float valor) {
 			this->rating = valor;
 		}
@@ -55,13 +73,17 @@ class Cancion
 
 private:
 	NodoCancion* primero;
-	char* p[] = "";
 	NodoCancion* ultimo;
 public:
 	Cancion() {
 		this->primero = 0;
 		this->ultimo = 0;
 	}
-	void insertar();
+	//Lista simplemente enlzada
+	void insertarAlbum(string name, string file, float rating);
+	//Diferentes tipos de estructura dependiendo el tipo
+	void insertarPlaylist(string tipo, string name, string album);
+	void graficarPlaylist(string tipo);
+
 };
 
