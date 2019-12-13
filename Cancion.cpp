@@ -3,8 +3,8 @@
 
 
 void Cancion::insertarAlbum(string name, string file, float rating) {
-	
-	if (this->primero==0) {
+
+	if (this->primero == 0) {
 		this->primero = new NodoCancion(name, file, rating);
 	}
 	else {
@@ -17,7 +17,7 @@ void Cancion::insertarAlbum(string name, string file, float rating) {
 void Cancion::insertarPlaylist(string tipo, string name, string album) {
 	NodoCancion* nuevo = new NodoCancion(name, album);
 
-	if (tipo=="Stack") {
+	if (tipo == "Stack") {
 		if (this->primero == 0) {
 			this->primero = nuevo;
 		}
@@ -52,5 +52,50 @@ void Cancion::insertarPlaylist(string tipo, string name, string album) {
 			this->primero->setAnteior(this->ultimo);
 			this->ultimo->setSiguiente(this->primero);
 		}
+	}
+}
+
+void Cancion::graficarPlaylist(string tipo) {
+	if (this->primero == 0) {
+		cout << "No tienes musica para mostrar :(." << endl;
+	}
+	else {
+
+		if (tipo == "Stack") {
+			
+		}
+		else if (tipo == "Queque") {
+			
+		}
+		else if (tipo == "Shuffle") {
+			//Graficar lista desordenada
+		}
+		else if (tipo == "Circular") {
+			
+		}
+	}
+}
+
+void Cancion::graficarCancionesAlbum() {
+	if (this->primero == 0) {
+		cout << "No tienes musica para mostrar :(." << endl;
+	}
+	else {
+		ofstream WriteFile("ListaCanciones.dot");
+		int x = 0;
+		WriteFile << "digraph listadoble{" << endl;
+		WriteFile << "node[shape=square];" << endl;
+		WriteFile << "rankdir = LR;" << endl;
+
+		NodoCancion* auxiliar = this->primero;
+		while (auxiliar != 0) {
+			WriteFile << "x" << auxiliar << "[label =\"" << auxiliar->getName() << "\"];" << endl;
+			WriteFile << "x" << auxiliar << " ->" << "x" << auxiliar->getSiguiente() << ";" << endl;
+			auxiliar = auxiliar->getSiguiente();
+		}
+
+		WriteFile.close();
+		system("dot -Tpng ListaCanciones.dot -o simplecanciones.png");
+		system("simplecanciones.png");
 	}
 }

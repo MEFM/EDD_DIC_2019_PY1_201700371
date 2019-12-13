@@ -1,6 +1,9 @@
 #pragma once
+
 #include <string>
 #include <stdlib.h>
+#include <iostream>
+#include <fstream>
 
 using namespace std;
 class Cancion
@@ -84,6 +87,11 @@ public:
 	//Diferentes tipos de estructura dependiendo el tipo
 	void insertarPlaylist(string tipo, string name, string album);
 	void graficarPlaylist(string tipo);
+
+	void graficarCancionesAlbum();
+
+	void mostrarCancionesAlbum();
+	void mostrarCancionesPlaylist();
 
 };
 
