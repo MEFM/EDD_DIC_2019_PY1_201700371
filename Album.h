@@ -83,7 +83,6 @@ public:
 	void setUltimo();
 	void setNombre();
 	void setCanciones();
-
 	
 
 };

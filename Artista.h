@@ -37,15 +37,28 @@ class Artista
 			nombre = name;
 		}
 
-		NodoArtista(string nombre) {
-
+		NodoArtista(string nombre, CuboDisperso<Album*> * discografia) {
+			this->siguiente = 0;
+			this->anterior = 0;
+			this->nombre = nombre;
+			this->discografia = discografia;
 		}
 
 	};
 private:
 	NodoArtista* primero;
 	NodoArtista* ultimo;
-	string nombre;
+	
+public:
+	Artista() {
+		this->primero = 0;
+		this->ultimo = 0;
+	}
+
+	void insertarOrdenado(string nombre, CuboDisperso<Album*> * discografia);
+	void imprimirConsola();
+	void graficarLista();
+	
 
 };
 

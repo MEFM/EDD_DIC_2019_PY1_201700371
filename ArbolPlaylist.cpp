@@ -53,6 +53,8 @@ void ArbolPlaylist::recorridoConsola(NodoArbolBinario* root) {
 
 void ArbolPlaylist::buscarPlayList(string nombre) {
 	this->buscarPlayList(nombre, this->raiz);
+
+	
 }
 
 NodoArbolBinario* ArbolPlaylist::buscarPlayList(string nombre, NodoArbolBinario* root) {
@@ -73,7 +75,7 @@ NodoArbolBinario* ArbolPlaylist::buscarPlayList(string nombre, NodoArbolBinario*
 		}
 		else if (strcmp(palabra1, palabra2) <= 0) {
 			if (root == 0) {
-
+				//Mostrar nombre de la playlist y su contenido
 			}
 			else {
 				buscarPlayList(nombre, root->getDerecho());
@@ -81,7 +83,7 @@ NodoArbolBinario* ArbolPlaylist::buscarPlayList(string nombre, NodoArbolBinario*
 		}
 		else {
 			if (root == 0) {
-
+				//Mostrar nombre de la playlist y su contenido
 			}
 			else
 			{

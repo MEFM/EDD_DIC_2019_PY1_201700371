@@ -20,6 +20,7 @@ class Cancion
 
 		//Para instancias de tipo playlist
 		string album;
+		string tipo;
 	
 	public:
 		NodoCancion(string name, string file, float rating) {
@@ -50,6 +51,9 @@ class Cancion
 		string getAlgum() {
 			return this->album;
 		}
+		string getTipo() {
+			return this->tipo;
+		}
 		float getRating() {
 			return this->rating;
 		}
@@ -68,6 +72,9 @@ class Cancion
 		}
 		void setAlbum(string album) {
 			this->album = album;
+		}
+		void setTipo(string tipo) {
+			this->tipo = tipo;
 		}
 		void setRating(float valor) {
 			this->rating = valor;
@@ -92,6 +99,7 @@ public:
 
 	void mostrarCancionesAlbum();
 	void mostrarCancionesPlaylist();
+	
 
 };
 

@@ -60,12 +60,43 @@ void Cancion::graficarPlaylist(string tipo) {
 		cout << "No tienes musica para mostrar :(." << endl;
 	}
 	else {
-
+		
 		if (tipo == "Stack") {
-			
+
+			NodoCancion* auxiliar = this->primero;
+
+			ofstream WriteFile("ListaReproduccion.dot");
+			WriteFile << "digraph listaR{" << endl;
+			WriteFile << "nod[" << endl;
+			WriteFile << "<table border = \"0\" cellborder = \"1\" cellspacing = \"0\">" << endl;
+			WriteFile << "<tr><td> </td></tr>" << endl;
+			while (auxiliar != 0) {
+				WriteFile << "<tr><td>(x"<< auxiliar << ", x" << auxiliar->getSiguiente() <<")</td></tr>" << endl;
+				auxiliar = auxiliar->getSiguiente();
+			}
+			WriteFile << "]" << endl;
+			WriteFile << "}" << endl;
+			WriteFile.close();
+			system("dot -Tpng ListaReproduccion.dot -o Reproduccion.png");
+			system("Reproduccion.png");
 		}
 		else if (tipo == "Queque") {
-			
+			NodoCancion* auxiliar = this->primero;
+
+			ofstream WriteFile("ListaReproduccion.dot");
+			WriteFile << "digraph listaR{" << endl;
+			WriteFile << "node[shape = square];" << endl;
+			WriteFile << "rankdir = LR;" << endl;
+			while (auxiliar != 0) {
+				WriteFile << "x" << auxiliar << "[label =\"" << auxiliar->getName() << "\"];" << endl;
+				WriteFile << "x" << auxiliar << " ->" << "x" << auxiliar->getSiguiente() << ";" << endl;
+				auxiliar = auxiliar->getSiguiente();
+			}
+			WriteFile << "}" << endl;
+			WriteFile.close();
+			system("dot -Tpng ListaReproduccion.dot -o Reproduccion.png");
+			system("Reproduccion.png");
+
 		}
 		else if (tipo == "Shuffle") {
 			//Graficar lista desordenada
@@ -73,6 +104,8 @@ void Cancion::graficarPlaylist(string tipo) {
 		else if (tipo == "Circular") {
 			
 		}
+
+		
 	}
 }
 
@@ -93,9 +126,35 @@ void Cancion::graficarCancionesAlbum() {
 			WriteFile << "x" << auxiliar << " ->" << "x" << auxiliar->getSiguiente() << ";" << endl;
 			auxiliar = auxiliar->getSiguiente();
 		}
-
+		WriteFile << "}" << endl;
 		WriteFile.close();
 		system("dot -Tpng ListaCanciones.dot -o simplecanciones.png");
 		system("simplecanciones.png");
+	}
+}
+
+void Cancion::mostrarCancionesAlbum() {
+	if (this->primero == 0) {
+		cout << "No existen canciones dentro de este album." << endl;
+	}
+	else {
+		NodoCancion* auxiliar = this->primero;
+		int contador = 0;
+		while (auxiliar != 0)
+		{
+			cout << contador << ". "<< auxiliar->getName() << endl;
+			auxiliar = auxiliar->getSiguiente();
+		}
+		cout << "Gracias por utilizar Music++" << endl;
+	}
+}
+
+void Cancion::mostrarCancionesPlaylist() {
+	if (this->primero == 0) {
+		cout << "No existen canciones dentro de este album." << endl;
+	}
+	else {
+		NodoCancion* auxiliar = this->primero;
+		
 	}
 }
