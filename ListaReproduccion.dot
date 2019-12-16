@@ -1,0 +1,12 @@
+digraph listaR{
+node [shape = plaintext]
+nod[
+label = <
+<table border = "0" cellborder = "1" cellspacing = "0">
+<tr><td> </td></tr>
+<tr><td>Blinded, As I Lay Dying</td></tr>
+<tr><td>On My Teeth, Underoath</td></tr>
+<tr><td>Young and Aspiring, Underoath</td></tr>
+</table>>
+];
+}

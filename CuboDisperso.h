@@ -7,19 +7,14 @@ template<class T>
 
 class CuboDisperso
 {
-	
-
-private:
-	NodoDisperso * raiz;
-public:
 	class NodoDisperso {
 	public:
-		NodoDisperso * izquierda;
-		NodoDisperso * derecha;
-		NodoDisperso * arriba;
-		NodoDisperso * abajo;
-		NodoDisperso * front;
-		NodoDisperso * back;
+		NodoDisperso* izquierda;
+		NodoDisperso* derecha;
+		NodoDisperso* arriba;
+		NodoDisperso* abajo;
+		NodoDisperso* front;
+		NodoDisperso* back;
 		T dato;
 		int año;
 		string mes;
@@ -36,6 +31,11 @@ public:
 			this->mes = mes;
 		}
 	};
+
+
+private:
+	NodoDisperso* raiz;
+public:
 
 	CuboDisperso() { this->raiz = new NodoDisperso(0, -1, "Raiz"); }
 	void insertar(T dato, int año, string mes);
@@ -65,8 +65,15 @@ public:
 	
 	//Insertar mes y ordenar año
 	void insertarAnoO(NodoDisperso* nuevo, NodoDisperso * cabeceraM) {
-		if (this->raiz == 0) {
+		NodoDisperso* temporal = cabeceraM;
+		while (true) {
+			if (temporal->año == nuevo->año) {
+				temporal->mes = nuevo->mes;
+				temporal->dato = nuevo->dato;
+			}
+			else {
 
+			}
 		}
 	}
 	void insertarMes(NodoDisperso* nuevo) {

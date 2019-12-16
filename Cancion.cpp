@@ -3,19 +3,19 @@
 
 
 void Cancion::insertarAlbum(string name, string file, float rating) {
+	NodoCancion* nuevo = new NodoCancion(name, file, rating);
 
 	if (this->primero == 0) {
 		this->primero = new NodoCancion(name, file, rating);
 	}
 	else {
-		NodoCancion* nuevo = new NodoCancion(name, file, rating);
 		nuevo->setSiguiente(this->primero);
 		this->primero = nuevo;
 	}
 }
 
-void Cancion::insertarPlaylist(string tipo, string name, string album) {
-	NodoCancion* nuevo = new NodoCancion(name, album);
+void Cancion::insertarPlaylist(string tipo, string name, string album, string artista) {
+	NodoCancion* nuevo = new NodoCancion(name, tipo, album, artista);
 
 	if (tipo == "Stack") {
 		if (this->primero == 0) {
@@ -55,32 +55,36 @@ void Cancion::insertarPlaylist(string tipo, string name, string album) {
 	}
 }
 
-void Cancion::graficarPlaylist(string tipo) {
+void Cancion::graficarPlaylist() {
 	if (this->primero == 0) {
 		cout << "No tienes musica para mostrar :(." << endl;
 	}
 	else {
-		
-		if (tipo == "Stack") {
+		//this->primero->getTipo() == "Stack"
+
+		if (this->primero->getTipo() == "Stack") {
 
 			NodoCancion* auxiliar = this->primero;
 
 			ofstream WriteFile("ListaReproduccion.dot");
 			WriteFile << "digraph listaR{" << endl;
+			WriteFile << "node [shape = plaintext]" << endl;
 			WriteFile << "nod[" << endl;
+			WriteFile << "label = <" << endl;
 			WriteFile << "<table border = \"0\" cellborder = \"1\" cellspacing = \"0\">" << endl;
 			WriteFile << "<tr><td> </td></tr>" << endl;
 			while (auxiliar != 0) {
-				WriteFile << "<tr><td>(x"<< auxiliar << ", x" << auxiliar->getSiguiente() <<")</td></tr>" << endl;
+				WriteFile << "<tr><td>"<< auxiliar->getName()<<", "<< auxiliar->getArtista() <<"</td></tr>" << endl;
 				auxiliar = auxiliar->getSiguiente();
 			}
-			WriteFile << "]" << endl;
+			WriteFile << "</table>>" << endl;
+			WriteFile << "];" << endl;
 			WriteFile << "}" << endl;
 			WriteFile.close();
 			system("dot -Tpng ListaReproduccion.dot -o Reproduccion.png");
 			system("Reproduccion.png");
 		}
-		else if (tipo == "Queque") {
+		else if (this->primero->getTipo() == "Queque") {
 			NodoCancion* auxiliar = this->primero;
 
 			ofstream WriteFile("ListaReproduccion.dot");
@@ -98,10 +102,10 @@ void Cancion::graficarPlaylist(string tipo) {
 			system("Reproduccion.png");
 
 		}
-		else if (tipo == "Shuffle") {
+		else if (this->primero->getTipo() == "Shuffle") {
 			//Graficar lista desordenada
 		}
-		else if (tipo == "Circular") {
+		else if (this->primero->getTipo() == "Circular") {
 			
 		}
 

@@ -151,6 +151,7 @@
     <ClInclude Include="Album.h" />
     <ClInclude Include="ArbolPlaylist.h" />
     <ClInclude Include="Artista.h" />
+    <ClInclude Include="BibliotecaArtista.h" />
     <ClInclude Include="Cancion.h" />
     <ClInclude Include="CuboDisperso.h" />
     <ClInclude Include="ListaDoble.h" />
@@ -162,6 +163,7 @@
     <ClCompile Include="Album.cpp" />
     <ClCompile Include="ArbolPlaylist.cpp" />
     <ClCompile Include="Artista.cpp" />
+    <ClCompile Include="BibliotecaArtista.cpp" />
     <ClCompile Include="Cancion.cpp" />
     <ClCompile Include="CuboDisperso.cpp" />
     <ClCompile Include="NodoArbolBinario.cpp" />

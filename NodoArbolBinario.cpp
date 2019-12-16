@@ -6,10 +6,11 @@ NodoArbolBinario::NodoArbolBinario()
 {
 }
 
-NodoArbolBinario::NodoArbolBinario(string nombre_artista) {
+NodoArbolBinario::NodoArbolBinario(string nombre_artista, Cancion* canciones) {
 	this->derecho = 0;
 	this->izquierdo = 0;
 	this->nombre_artista = nombre_artista;
+	this->canciones = canciones;
 }
 
 NodoArbolBinario *NodoArbolBinario::getDerecho() {
@@ -34,6 +35,14 @@ string NodoArbolBinario::getNombre() {
 
 void NodoArbolBinario::setNombre(string nombre) {
 	this->nombre_artista = nombre;
+}
+
+Cancion* NodoArbolBinario::getCanciones() {
+	return this->canciones;
+}
+
+void NodoArbolBinario::setCanciones(Cancion* canciones) {
+	this->canciones = canciones;
 }
 
 NodoArbolBinario::~NodoArbolBinario()

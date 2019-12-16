@@ -21,6 +21,7 @@ class Cancion
 		//Para instancias de tipo playlist
 		string album;
 		string tipo;
+		string artista;
 	
 	public:
 		NodoCancion(string name, string file, float rating) {
@@ -30,11 +31,13 @@ class Cancion
 			this->file = file;
 			this->rating = rating;
 		}
-		NodoCancion(string name, string album) {
+		NodoCancion(string name, string tipo,string album, string artista) {
 			this->siguiente = 0;
 			this->anterior = 0;
+			this->tipo = tipo;
 			this->name = name;
 			this->album = album;
+			this->artista = artista;
 		}
 		NodoCancion* getSiguiente() {
 			return this->siguiente;
@@ -53,6 +56,9 @@ class Cancion
 		}
 		string getTipo() {
 			return this->tipo;
+		}
+		string getArtista() {
+			return this->artista;
 		}
 		float getRating() {
 			return this->rating;
@@ -76,6 +82,9 @@ class Cancion
 		void setTipo(string tipo) {
 			this->tipo = tipo;
 		}
+		void setArtista(string artista) {
+			this->artista = artista;
+		}
 		void setRating(float valor) {
 			this->rating = valor;
 		}
@@ -92,11 +101,10 @@ public:
 	//Lista simplemente enlzada
 	void insertarAlbum(string name, string file, float rating);
 	//Diferentes tipos de estructura dependiendo el tipo
-	void insertarPlaylist(string tipo, string name, string album);
-	void graficarPlaylist(string tipo);
-
+	void insertarPlaylist(string tipo, string name, string album, string artista);
+	void graficarPlaylist();
 	void graficarCancionesAlbum();
-
+	//Graficas, reportes (da lo mismo)
 	void mostrarCancionesAlbum();
 	void mostrarCancionesPlaylist();
 	

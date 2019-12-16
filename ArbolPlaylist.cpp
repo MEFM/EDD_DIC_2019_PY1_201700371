@@ -7,11 +7,15 @@ ArbolPlaylist::ArbolPlaylist()
 	this->raiz = 0;
 }
 
-void ArbolPlaylist::insertar(string nombre, NodoArbolBinario* arbol) {
+void ArbolPlaylist::insertar(string nombre, Cancion* canciones) {
+	this->insertar(nombre, this->raiz, canciones);
+}
+
+void ArbolPlaylist::insertar(string nombre, NodoArbolBinario* arbol, Cancion * canciones) {
 	/*RECORDAR EL ATRIBUTO DE PLAYLIST*/
 
 	if (arbol == 0) {
-		NodoArbolBinario* nuevo = new NodoArbolBinario(nombre);
+		NodoArbolBinario* nuevo = new NodoArbolBinario(nombre, canciones);
 		arbol = nuevo;
 	}
 	else {
@@ -19,11 +23,11 @@ void ArbolPlaylist::insertar(string nombre, NodoArbolBinario* arbol) {
 		char* palabra2 = (char*)nombre.c_str();
 		if (0 <= strcmp(palabra2, palabra1)) {
 			//Insertar a la derecha
-			insertar(nombre, arbol->getDerecho());
+			insertar(nombre, arbol->getDerecho(), arbol->getCanciones());
 		}
 		else {
 			//Insertar a la izquierda
-			insertar(nombre, arbol->getIzquierdo());
+			insertar(nombre, arbol->getIzquierdo(), arbol->getCanciones());
 		}
 
 

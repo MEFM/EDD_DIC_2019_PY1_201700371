@@ -1,35 +1,105 @@
 #include "stdafx.h"
 #include "Artista.h"
 
-void Artista::insertarOrdenado(string nombre, CuboDisperso<Album*> * discografia) {
-	if (this->primero == 0) {
-		this->primero = this->ultimo = new NodoArtista(nombre, discografia);
-	}
-	else {
-		NodoArtista* nuevo = new NodoArtista(nombre, discografia);
-		NodoArtista* auxiliar = this->primero;
-		do {
-			char* nombreNuevo = (char*)auxiliar->getNombre().c_str();
-			char* nombreSiguiente = (char*)auxiliar->getSiguiente()->getNombre().c_str();
-			char* nombreAnterior = (char*)auxiliar->getAnterior()->getNombre().c_str();
+void Artista::insertarOrdenado(string nombre, BibliotecaArtista* discografia) {
+	NodoArtista* nuevo = new NodoArtista(nombre, discografia);
 
-			if (strcmp(nombreNuevo, nombreSiguiente) <= 0) {
-				if (auxiliar->getAnterior() != 0) {
-					auxiliar->getAnterior()->setSiguiente(nuevo);
-					auxiliar->getSiguiente()->setAnterior(nuevo);
-					auxiliar = nuevo;
-					this->primero->setAnterior(this->ultimo);
-					this->ultimo->setSiguiente(this->primero);
-				}
-			}
-			else {
-				auxiliar->getAnterior()->setSiguiente(nuevo);
-				auxiliar->getSiguiente()->setAnterior(nuevo);
-				auxiliar = nuevo;
-				this->primero->setAnterior(this->ultimo);
-				this->ultimo->setSiguiente(this->primero);
-			}
-			auxiliar = auxiliar->getSiguiente();
-		} while (auxiliar->getSiguiente() != this->ultimo);
+	if (this->primero == 0) {
+		this->primero = nuevo;
+		this->ultimo = nuevo;
+	}
+	else
+	{
+		nuevo->setSiguiente(this->primero);
+		this->primero->setAnterior(nuevo);
+		this->primero = nuevo;
 	}
 }
+
+void Artista::insertarOrdenado(string nombre) {
+	NodoArtista* nuevo = new NodoArtista(nombre);
+
+	if (this->primero == 0) {
+		this->primero = nuevo;
+	}
+	else {
+		nuevo->setSiguiente(this->primero);
+		this->primero = nuevo;
+	}
+}
+
+void Artista::imprimirConsola() {
+	if (this->primero == 0) {
+		cout << "Agrega artistas para ver discografias!" << endl;
+	}
+	else {
+		NodoArtista* aux = this->primero;
+		
+		while (aux != 0) {
+			cout << aux->getNombre() << endl;
+			aux = aux->getSiguiente();
+		}
+	}
+}
+
+void Artista::graficarLista() {
+	if (this->primero == 0) {
+		cout << "Agrega artistas para ver reporte de artista!" << endl;
+	}
+	else {
+		NodoArtista* auxiliar = this->primero;
+		ofstream WriteFile("ListaArtista.dot");
+		WriteFile << "digraph listadoble{" << endl;
+		WriteFile << "node[shape = square];" << endl;
+		WriteFile << "rankdir = LR";
+		WriteFile << "subgraph a{" << endl;
+		WriteFile << "label = \"Artistas\"" << endl;
+		while (auxiliar->getSiguiente() != 0) {
+			WriteFile << "x" << auxiliar << "[label =\"" << auxiliar->getNombre() << "\"];" << endl;
+			WriteFile << "x" << auxiliar << " ->" << "x" << auxiliar->getSiguiente() << ";" << endl;
+			WriteFile << "x" << auxiliar->getAnterior() << " ->" << "x" << auxiliar << ";" << endl;
+			auxiliar = auxiliar->getSiguiente();
+		}
+		WriteFile << "}" << endl;
+		WriteFile << "}" << endl;
+		WriteFile.close();
+		system("dot -Tpng ListaArtista.dot -o ReporteArtista.dot");
+		system("ReporteArtista.dot");
+	}
+}
+
+void Artista::buscarArtista(string nombre) {
+	if (this->primero == 0) {
+		cout << "No tienes artistas agregados en este momento." << endl;
+	}
+	else {
+		NodoArtista* iterador = this->primero;
+
+		while (true) {
+			if (nombre == iterador->getNombre()) {
+				this->mostrarArtista(iterador);
+				break;
+			}
+			else if (nombre != iterador->getNombre() && iterador->getSiguiente() == 0) {
+				cout << "El artista no esta dentro de tu lista de artistas!" << endl;
+				break;
+			}
+			iterador = iterador->getSiguiente();
+		}
+
+	}
+}
+
+void Artista::mostrarArtista(NodoArtista* artista) {
+	cout << "Mostrandote a tu artista favorito!" << endl;
+	cout << "				MUSIC++				" << endl;
+	cout << "___________________________________" << endl;
+	cout << "-	" << artista->getNombre() << "" << endl;
+	artista->getDiscografia()->imprimir();
+	cout << "Deseas ver el contenido de un album en especifico?" << endl;
+	cout << "Puedes hacerlo escribiendo el nombre abajo. :D" << endl;
+	string nombreAlbum;
+
+	artista->getDiscografia()->buscarAlbum(nombreAlbum);
+}
+

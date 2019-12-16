@@ -10,11 +10,11 @@ class ArbolPlaylist
 private:
 	NodoArbolBinario * raiz;
 	//recordarme de agregarle el atributo de playlist
-	void insertar(string, NodoArbolBinario*);
+	void insertar(string, NodoArbolBinario*, Cancion*);
 	void recorridoConsola(NodoArbolBinario*);
 	NodoArbolBinario* buscarPlayList(string, NodoArbolBinario*);
 public:
-	void insertar(string);
+	void insertar(string, Cancion*);
 	void recorridoConsola();
 	void reporte_playlist();
 	void menu_reportesRecorrido();
