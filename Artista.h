@@ -77,7 +77,6 @@ public:
 	void graficarLista();
 	void buscarArtista(string nombre);
 	void mostrarArtista(NodoArtista*);//Este metodo contiene lo que sera la matriz (biblioteca) y las canciones de los albumnes
-	void mostrarDiscografia();
 	void insertarOrdenado(string nombre);
 
 };

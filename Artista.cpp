@@ -98,8 +98,8 @@ void Artista::mostrarArtista(NodoArtista* artista) {
 	artista->getDiscografia()->imprimir();
 	cout << "Deseas ver el contenido de un album en especifico?" << endl;
 	cout << "Puedes hacerlo escribiendo el nombre abajo. :D" << endl;
-	string nombreAlbum;
-
+	string nombreAlbum = "";
+	cin >> nombreAlbum;
 	artista->getDiscografia()->buscarAlbum(nombreAlbum);
 }
 

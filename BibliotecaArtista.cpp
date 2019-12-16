@@ -153,11 +153,15 @@ void BibliotecaArtista::buscarAlbum(string nombre_album) {
 	else {
 		NodoBiblio* temporal = this->raiz;
 		NodoBiblio* temporal2 = 0;
+		Cancion* canciones = 0;
 		while (temporal != 0) {
 			temporal2 = temporal;
 			while (temporal2 != 0) {
 				if (temporal->album->getNombre() == nombre_album) {
 					//Enviar nodo para examinarlo!!!!
+					cout << temporal->album->getNombre();
+					canciones = temporal->album->getCanciones();
+					//representante->album = temporal->album;
 					break;
 				}
 				else if (temporal->album->getNombre() != nombre_album
@@ -170,8 +174,8 @@ void BibliotecaArtista::buscarAlbum(string nombre_album) {
 			temporal = temporal->abajo;
 		}
 
-		cout << "Estas son las canciones del album que has elegido "<<temporal->album->getNombre() << endl;
+		cout << "Estas son las canciones del album que has elegido " << endl;
+		canciones->mostrarCancionesAlbum();
 		cout << "_----.----__----.----___----.----___----.----___----.----_" << endl;
-		temporal->album->getCanciones()->mostrarCancionesAlbum();
 	}
 }
