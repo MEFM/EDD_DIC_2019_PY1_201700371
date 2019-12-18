@@ -8,117 +8,175 @@ ArbolPlaylist::ArbolPlaylist()
 }
 
 void ArbolPlaylist::insertar(string nombre, Cancion* canciones) {
-	this->insertar(nombre, this->raiz, canciones);
-}
 
-void ArbolPlaylist::insertar(string nombre, NodoArbolBinario* arbol, Cancion * canciones) {
-	/*RECORDAR EL ATRIBUTO DE PLAYLIST*/
-
-	if (arbol == 0) {
-		NodoArbolBinario* nuevo = new NodoArbolBinario(nombre, canciones);
-		arbol = nuevo;
+	if (this->raiz == 0) {
+		this->raiz = new NodoArbolBinario(nombre, canciones);
+		return;
 	}
 	else {
+		this->insertar(nombre, this->raiz, canciones);
+	}
+
+}
+
+void ArbolPlaylist::insertar(string nombre, NodoArbolBinario* arbol, Cancion* canciones) {
+	/*RECORDAR EL ATRIBUTO DE PLAYLIST*/
+	if (arbol != 0) {
 		char* palabra1 = (char*)arbol->getNombre().c_str();
 		char* palabra2 = (char*)nombre.c_str();
-		if (0 <= strcmp(palabra2, palabra1)) {
-			//Insertar a la derecha
-			insertar(nombre, arbol->getDerecho(), arbol->getCanciones());
-		}
-		else {
-			//Insertar a la izquierda
-			insertar(nombre, arbol->getIzquierdo(), arbol->getCanciones());
-		}
+		
+		if (nombre.size() < arbol->getNombre().size()) {
+			if (arbol->getDerecho() != 0) {
 
-
+				insertar(nombre, arbol->getDerecho(), canciones);
+			}
+			else {
+				cout << "Si es el pequeño" << arbol->getNombre() << " " << nombre << endl;
+				system("pause");
+				arbol->setDerecho(new NodoArbolBinario(nombre, canciones));
+			}
+		}
+		else if (strcmp(palabra2, palabra1) > 0) {
+			if (arbol->getIzquierdo() != 0) {
+				insertar(nombre, arbol->getIzquierdo(), canciones);
+			}
+			else {
+				arbol->setIzquierdo(new NodoArbolBinario(nombre, canciones));
+			}
+		}
 	}
+	else {
+		arbol = new NodoArbolBinario(nombre, canciones);
+	}
+
+
+
+
 }
 
 void ArbolPlaylist::recorridoConsola() {
 	this->recorridoConsola(this->raiz);
+
 }
 
 void ArbolPlaylist::recorridoConsola(NodoArbolBinario* root) {
 	int contador = 1;
-	if (this->raiz == 0) {
-		cout << "No tienes listas de reproduccion disponibles." << endl;
-		return;
-	}
-	if (root == 0) {
-		return;
-	}
-	else {
+	if (root != 0) {
 		this->recorridoConsola(root->getIzquierdo());
 		cout << contador << ". " << root->getNombre() << endl;
 		this->recorridoConsola(root->getDerecho());
 		contador++;
+
 	}
+
+
 }
 
 void ArbolPlaylist::buscarPlayList(string nombre) {
 	this->buscarPlayList(nombre, this->raiz);
 
-	
+
 }
 
-NodoArbolBinario* ArbolPlaylist::buscarPlayList(string nombre, NodoArbolBinario* root) {
-	if (this->raiz == 0) {
-		cout << "No tienes listas de reproduccion disponibles." << endl;
-		return NULL;
-	}
-	if (root == 0) {
-		return NULL;
+void ArbolPlaylist::buscarPlayList(string nombre, NodoArbolBinario* nodo) {
+	if (nodo == 0) {
+		cout << "out" << endl;
+		return;
 	}
 	else {
-		char* palabra1 = (char*)nombre.c_str();
-		char* palabra2 = (char*)root->getNombre().c_str();
+		cout << nodo->getNombre() << endl;
+		const char* nombre1 = (char*)nombre.c_str();
+		const char* nombre2 = (char*)nodo->getNombre().c_str();
 
-		if (strcmp(palabra1, palabra2) == 0 && nombre == root->getNombre()) {
-			cout << "Hemos encontrado tu playlist!" << endl;
-			cout << root->getNombre() << endl;
+		if (strcmp(nombre1, nombre2) && nodo->getNombre() == nombre) {
+			cout << "Se encontraron coincidencias" << endl;
+			nodo->getCanciones()->graficarPlaylist();
+
 		}
-		else if (strcmp(palabra1, palabra2) <= 0) {
-			if (root == 0) {
-				//Mostrar nombre de la playlist y su contenido
+		else if (strcmp(nombre1, nombre2) < 0) {
+			//buscar por la izquierda
+
+			cout << "buscado" << endl;
+			if (nodo->getIzquierdo() != 0) {
+				this->buscarPlayList(nombre, nodo->getIzquierdo());
 			}
-			else {
-				buscarPlayList(nombre, root->getDerecho());
-			}
+
 		}
 		else {
-			if (root == 0) {
-				//Mostrar nombre de la playlist y su contenido
+
+			cout << "buscador" << endl;
+			if (nodo->getDerecho() != 0) {
+				this->buscarPlayList(nombre, nodo->getDerecho());
 			}
-			else
-			{
-				buscarPlayList(nombre, root->getIzquierdo());
-			}
+
 		}
 	}
 
 }
 
-void ArbolPlaylist::menu_reportesRecorrido() {
-	bool validador = 0;
-	int seleccion = 0;
-	while (validador) {
-		system("clr");
-		cout << "------Tu decides como ves tus listas de reproduccion!------" << endl;
-		cout << "1. Deseas ver todas tus playlist?" << endl;
-		cout << "2. Prefieres ver tus playlist en orden alfabetico?" << endl;
-		cout << "3. Lista desordenada" << endl;
-		cout << "4. Buscas una lista en especifico?" << endl;
-		cin >> seleccion;
-		switch (seleccion)
-		{
+void ArbolPlaylist::mostrarenConsola() {
+	this->mostrarenConsola(this->raiz);
+	//this->buscarPlayList("avanzado.json", this->raiz);
+}
 
-		default:
-			break;
-		}
+void ArbolPlaylist::mostrarenConsola(NodoArbolBinario* nodo) {
+	if (nodo == 0) {
 
+		return;
+	}
+	else {
+		cout << nodo->getNombre() << endl;
+		this->mostrarenConsola(nodo->getIzquierdo());
+		this->mostrarenConsola(nodo->getDerecho());
 	}
 }
 
+void ArbolPlaylist::reporte_playlist() {
+	this->reporte_playlist(this->raiz);
+}
+
+void ArbolPlaylist::reporte_playlist(NodoArbolBinario* nodo) {
+	if (nodo == 0) {
+		return;
+	}
+	else {
+		ofstream WriteFile("reportePlaylist.dot");
+		WriteFile << "digraph reporte{" << endl;
+		WriteFile << "node [shape = circle];" << endl;
+
+
+		if (nodo->getIzquierdo() != 0) {
+			//WriteFile << nodo->getNombre() << "->" << nodo->getIzquierdo()->getNombre() << endl;
+			controla += nodo->getNombre()+"->" + nodo->getIzquierdo()->getNombre()+"\n";
+		}
+		else {
+			this->reporte_playlist(nodo->getIzquierdo());
+			this->reporte_playlist(nodo->getDerecho());
+		}
+
+		if (nodo->getDerecho() != 0) {
+			controla += nodo->getNombre() + "->" + nodo->getDerecho()->getNombre() + "\n";
+
+		}
+		else {
+			this->reporte_playlist(nodo->getIzquierdo());
+			this->reporte_playlist(nodo->getDerecho());
+		}
+		this->reporte_playlist(nodo->getIzquierdo());
+		this->reporte_playlist(nodo->getDerecho());
+	//	controla += nodo->getNombre() + "->" + nodo->getIzquierdo()->getNombre() + "\n";
+		//controla += nodo->getNombre() + "->" + nodo->getDerecho()->getNombre() + "\n";
+
+		WriteFile << controla << endl;
+		WriteFile << "}" << endl;
+		WriteFile.close();
+		system("dot -Tpng reportePlaylist.dot -o Playlist.png");
+		system("Playlist.png");
+		//controla = "";
+		system("pause");
+	}
+
+}
 ArbolPlaylist::~ArbolPlaylist()
 {
 }

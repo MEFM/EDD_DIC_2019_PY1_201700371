@@ -1,0 +1,19 @@
+digraph listadoble{
+node[shape=square];
+rankdir = LR;
+x00977230[label ="Blinded"];
+x00977230 ->x00977168;
+x00977230 ->x0097ADD0;
+x00977168[label ="Live Undead"];
+x00977168 ->x009770A0;
+x00977168 ->x00977230;
+x009770A0[label ="Blinded"];
+x009770A0 ->x0097AE98;
+x009770A0 ->x00977168;
+x0097AE98[label ="On My Teeth"];
+x0097AE98 ->x0097ADD0;
+x0097AE98 ->x009770A0;
+x0097ADD0[label ="Young and Aspiring"];
+x0097ADD0 ->x00977230;
+x0097ADD0 ->x0097AE98;
+}

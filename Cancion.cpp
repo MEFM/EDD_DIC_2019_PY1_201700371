@@ -32,9 +32,11 @@ void Cancion::insertarPlaylist(string tipo, string name, string album, string ar
 			this->primero = this->ultimo;
 		}
 		else {
-			nuevo->setAnteior(this->ultimo);
-			this->ultimo = nuevo;
-			this->primero = this->ultimo;
+			NodoCancion* temporal = this->primero;
+			while (temporal->getSiguiente() != 0) {
+				temporal = temporal->getSiguiente();
+			}
+			temporal->setSiguiente(nuevo);
 		}
 	}
 	else if (tipo == "Shuffle") {
@@ -87,7 +89,7 @@ void Cancion::graficarPlaylist() {
 		else if (this->primero->getTipo() == "Queque") {
 			NodoCancion* auxiliar = this->primero;
 
-			ofstream WriteFile("ListaReproduccion.dot");
+			ofstream WriteFile("ListaReproduccionQ.dot");
 			WriteFile << "digraph listaR{" << endl;
 			WriteFile << "node[shape = square];" << endl;
 			WriteFile << "rankdir = LR;" << endl;
@@ -98,15 +100,35 @@ void Cancion::graficarPlaylist() {
 			}
 			WriteFile << "}" << endl;
 			WriteFile.close();
-			system("dot -Tpng ListaReproduccion.dot -o Reproduccion.png");
-			system("Reproduccion.png");
+			system("dot -Tpng ListaReproduccionQ.dot -o ReproduccionQ.png");
+			system("ReproduccionQ.png");
 
 		}
 		else if (this->primero->getTipo() == "Shuffle") {
 			//Graficar lista desordenada
 		}
 		else if (this->primero->getTipo() == "Circular") {
+			NodoCancion* auxiliar = this->primero;
 			
+			ofstream WriteFile("listadobleE.dot");
+			int x = 0;
+			WriteFile << "digraph listadoble{" << endl;
+			WriteFile << "node[shape=square];" << endl;
+			WriteFile << "rankdir = LR;" << endl;
+
+			do {
+				WriteFile << "x" << auxiliar << "[label =\"" << auxiliar->getName() << "\"];" << endl;
+				WriteFile << "x" << auxiliar << " ->" << "x" << auxiliar->getSiguiente() << ";" << endl;
+				WriteFile << "x" << auxiliar  << " ->" << "x" << auxiliar->getAnterior() << ";" << endl;
+
+				auxiliar = auxiliar->getSiguiente();
+			} while (auxiliar != this->ultimo->getSiguiente());
+			WriteFile << "}" << endl;
+			WriteFile.close();
+
+			system("dot -Tpng listadobleE.dot -o lista.png");
+			system("lista.png");
+		
 		}
 
 		

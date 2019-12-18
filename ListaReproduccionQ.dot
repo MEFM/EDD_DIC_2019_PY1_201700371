@@ -1,0 +1,18 @@
+digraph listaR{
+node[shape = square];
+rankdir = LR;
+x00D30FA8[label ="Young and Aspiring"];
+x00D30FA8 ->x00D2F938;
+x00D2F938[label ="On My Teeth"];
+x00D2F938 ->x00D31358;
+x00D31358[label ="Blinded"];
+x00D31358 ->x00D39468;
+x00D39468[label ="Live Undead"];
+x00D39468 ->x00D382F0;
+x00D382F0[label ="Blinded"];
+x00D382F0 ->x00D39DC0;
+x00D39DC0[label ="Live Undead"];
+x00D39DC0 ->x00D39E88;
+x00D39E88[label ="Blinded"];
+x00D39E88 ->x00000000;
+}

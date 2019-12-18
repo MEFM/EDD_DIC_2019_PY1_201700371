@@ -1,0 +1,7 @@
+digraph reporte{
+node [shape = circle];
+playlist->z
+playlist->avanzado
+avanzado->playlist_rock
+
+}

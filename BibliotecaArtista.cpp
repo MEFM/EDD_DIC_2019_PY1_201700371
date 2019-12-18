@@ -158,8 +158,8 @@ void BibliotecaArtista::buscarAlbum(string nombre_album) {
 			temporal2 = temporal;
 			while (temporal2 != 0) {
 				if (temporal->album->getNombre() == nombre_album) {
-					//Enviar nodo para examinarlo!!!!
-					cout << temporal->album->getNombre();
+					
+					//cout << temporal->album->getNombre();
 					canciones = temporal->album->getCanciones();
 					//representante->album = temporal->album;
 					break;
