@@ -184,3 +184,23 @@ void Cancion::mostrarCancionesPlaylist() {
 		
 	}
 }
+
+bool Cancion::confirmacionCancion(string nombre) {
+	if (this->primero == 0) {
+		return false;
+	}
+	else {
+		NodoCancion* iterador = this->primero;
+
+		while (true)
+		{
+			if (iterador == 0) {
+				return false;
+			}
+			else if (iterador->getName() == nombre) {
+				return true;
+			}
+			iterador = iterador->getSiguiente();
+		}
+	}
+}

@@ -79,5 +79,6 @@ public:
 	void mostrarArtista(NodoArtista*);//Este metodo contiene lo que sera la matriz (biblioteca) y las canciones de los albumnes
 	void insertarOrdenado(string nombre);
 
+	bool buscarCancion(string, string, string);
 };
 

@@ -95,11 +95,38 @@ void Artista::mostrarArtista(NodoArtista* artista) {
 	cout << "				MUSIC++				" << endl;
 	cout << "___________________________________" << endl;
 	cout << "-	" << artista->getNombre() << "" << endl;
-	artista->getDiscografia()->imprimir();
+	artista->getDiscografia()->mostrarI();
 	cout << "Deseas ver el contenido de un album en especifico?" << endl;
 	cout << "Puedes hacerlo escribiendo el nombre abajo. :D" << endl;
 	string nombreAlbum = "";
 	cin >> nombreAlbum;
 	artista->getDiscografia()->buscarAlbum(nombreAlbum);
+	cout << "Puedes ver su discografia si lo deseas... [S]/[N]" << endl;
+	string seleccion = "";
+	cin >> seleccion;
+	if (seleccion == "s" || seleccion == "S" || seleccion == "SI" || seleccion == "sI") {
+		artista->getDiscografia()->graficar();
+	}
+}
+
+bool Artista::buscarCancion(string artista, string album, string cancion) {
+	if (this->primero == 0) {
+		cout << "No hay artistas." << endl; //No hay artistas
+		return false;
+	}
+	else {
+		NodoArtista* iterador = this->primero;
+		while (true) {
+			if (artista == iterador->getNombre()) {
+				break;
+			}
+			else if (iterador == 0) {
+				return false; // No existe el artista
+			}
+			iterador = iterador->getSiguiente();//Itera hasta encontrar, o no, al artista.
+		}
+		return iterador->getDiscografia()->buscarCancion(album,cancion);
+	}
+	return false;
 }
 

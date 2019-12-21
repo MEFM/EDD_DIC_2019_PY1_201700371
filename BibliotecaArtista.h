@@ -36,7 +36,7 @@ private:
 
 public:
 	BibliotecaArtista() {
-		this->raiz = new NodoBiblio("", -1, 0);
+		this->raiz = new NodoBiblio("Root", -1, new Album("","","",0,new Cancion()));
 	}
 	NodoBiblio* raiz;
 
@@ -49,9 +49,11 @@ public:
 
 	void nuevoNivel(); 
 	void imprimir();
+	void mostrarI();
 	void graficar();
 	void insertar(string, int, Album*);
 	void buscarAlbum(string);
-
+	
+	bool buscarCancion(string, string);
 };
 

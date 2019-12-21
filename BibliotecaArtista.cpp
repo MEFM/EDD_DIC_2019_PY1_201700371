@@ -1,67 +1,58 @@
 #include "stdafx.h"
 #include "BibliotecaArtista.h"
 
-NodoBiblio* BibliotecaArtista::crearAño(int año) {//Crear columna
-	NodoBiblio* year = this->raiz;
-	NodoBiblio* auxiliar = new NodoBiblio("", año, 0);
+NodoBiblio* BibliotecaArtista::buscarMes(string mes) {//Buscar fila
+	NodoBiblio* temp = raiz;
 
-	NodoBiblio* anio = this->insertarAño(auxiliar, year);
-	return anio;
-}
+	while (temp != 0) {
+		if (temp->month == mes) {
+			return temp;
+		}
+		temp = temp->abajo;
 
-NodoBiblio* BibliotecaArtista::crearMes(string mes) {//Crear fila
-	NodoBiblio* month = this->raiz;
-	NodoBiblio* auxiliar = new NodoBiblio(mes, -1, 0);
-
-	NodoBiblio* newMes = this->insertarMes(auxiliar, month);
-	return newMes;
+	}
+	return 0;
 }
 
 NodoBiblio* BibliotecaArtista::buscarAño(int año) {//Buscar columna
-	NodoBiblio* temporal = this->raiz;
-	while (temporal != 0) {
-		if (temporal->año = año) {
-			return temporal;
+	NodoBiblio* temp = raiz;
+	while (temp != 0) {
+		if (temp->año == año) {
+			return temp;
+			break;
 		}
-		temporal = temporal->siguiente;
+		temp = temp->siguiente;
+
 	}
 	return 0;
 }
 
-NodoBiblio* BibliotecaArtista::buscarMes(string mes) {//Buscar fila
-	NodoBiblio* temporal = this->raiz;
-	while (temporal != 0) {
-		if (temporal->month == mes) {
-			return temporal;
-		}
-		temporal = temporal->abajo;
-	}
-	return 0;
-}
+
 
 NodoBiblio* BibliotecaArtista::insertarAño(NodoBiblio* nuevo, NodoBiblio* cabecera) {//insertar columna
 	NodoBiblio* aux = cabecera;
-	bool validador = false;
-
+	bool condicion = false;
 	while (true) {
 		if (aux->año == nuevo->año) {
 			aux->month = nuevo->month;
 			aux->album = nuevo->album;
 			return aux;
 		}
-		else if (aux->año > nuevo->año) {
-			validador = true;
+		else if (aux->año > nuevo->año)
+		{
+			condicion = true;
 			break;
 		}
-		if (aux->siguiente != 0) {
+		if (aux->siguiente != 0)
+		{
 			aux = aux->siguiente;
+
 		}
 		else {
 			break;
 		}
 	}
-
-	if (validador) {
+	if (condicion) {
 		nuevo->siguiente = aux;
 		aux->anterior->siguiente = nuevo;
 		nuevo->anterior = aux->anterior;
@@ -70,6 +61,7 @@ NodoBiblio* BibliotecaArtista::insertarAño(NodoBiblio* nuevo, NodoBiblio* cabece
 	else {
 		aux->siguiente = nuevo;
 		nuevo->anterior = aux;
+
 	}
 	return nuevo;
 }
@@ -77,53 +69,86 @@ NodoBiblio* BibliotecaArtista::insertarAño(NodoBiblio* nuevo, NodoBiblio* cabece
 NodoBiblio* BibliotecaArtista::insertarMes(NodoBiblio* nuevo, NodoBiblio* cabecera) {//insertar fila
 	NodoBiblio* aux = cabecera;
 	bool validador = false;
-
+	const char* a = (char*)aux->month.c_str();
+	const char* b = (char*)nuevo->month.c_str();
 	while (true) {
-		if (aux->month == nuevo->month) {
+		if (strcmp(a, b) == 0) {
 			aux->año = nuevo->año;
 			aux->album = nuevo->album;
 			return nuevo;
 			//unicamente si el mes esta repetido
 		}
-		else {
-			validador = true;
-		}
-		if (aux->siguiente != 0) {
+
+		if (aux->abajo != 0) {
 			aux = aux->abajo;
 		}
 		else {
 			break;
 		}
+
 	}
-	if (!validador) {
-		aux->abajo = nuevo;
-		nuevo->arriba = aux;
-	}
+
+	aux->abajo = nuevo;
+	nuevo->arriba = aux;
+
+
 	return nuevo;
 }
 
+
+
+NodoBiblio* BibliotecaArtista::crearAño(int año) {//Crear columna
+	NodoBiblio* cabezaColumna = raiz;
+
+	NodoBiblio* aux = new NodoBiblio("0", año, new Album("a", "a", "a", año, new Cancion()));
+
+	NodoBiblio* columna = insertarAño(aux, cabezaColumna);
+	return columna;
+}
+
+NodoBiblio* BibliotecaArtista::crearMes(string mes) {//Crear fila
+	NodoBiblio* cabezaFila = raiz;
+
+	NodoBiblio* aux = new NodoBiblio(mes, 0, new Album("a", mes, "a", 0, new Cancion()));
+
+	NodoBiblio* fila = insertarMes(aux, cabezaFila);
+
+	return fila;
+}
+
+
+
+
+
+
 void BibliotecaArtista::insertar(string mes, int año, Album* album) {
 	NodoBiblio* nuevo = new NodoBiblio(mes, año, album);
+	NodoBiblio* nodoAño = buscarAño(año);
+	NodoBiblio* nodoMes = buscarMes(mes);
 
-	if (this->buscarAño(año) == 0 && this->buscarMes(mes) == 0) {
-
-		this->insertarAño(nuevo, this->crearAño(año));
-		this->insertarMes(nuevo, this->crearMes(mes));
+	if (nodoAño == 0 && nodoMes == 0) {
+		nodoAño = this->crearAño(año);
+		nodoMes = this->crearMes(mes);
+		nuevo = insertarAño(nuevo, nodoAño);
+		nuevo = insertarMes(nuevo, nodoMes);
+		return;
 	}
-	else if (this->buscarAño(año) != 0 && this->buscarMes(mes) == 0) {
-
-		this->insertarMes(nuevo, this->crearMes(mes));
-		this->insertarAño(nuevo, this->buscarAño(año));
+	else if (nodoAño != 0 && nodoMes == 0) {
+		nodoMes = this->crearMes(mes);
+		nuevo = insertarMes(nuevo, nodoMes);
+		nuevo = insertarAño(nuevo, nodoAño);
+		return;
 	}
-	else if (this->buscarAño(año) == 0 && this->buscarMes(mes) != 0) {
-
-		this->insertarMes(nuevo, this->buscarMes(mes));
-		this->insertarAño(nuevo, this->crearAño(año));
+	else if (nodoAño == 0 && nodoMes != 0) {
+		nodoAño = this->crearAño(año);
+		nuevo = insertarMes(nuevo, nodoMes);
+		nuevo = insertarAño(nuevo, nodoAño);
+		return;
 	}
-	else if (this->buscarAño(año) != 0 && this->buscarMes(mes) != 0) {
-
-		this->insertarMes(nuevo, this->buscarMes(mes));
-		this->insertarAño(nuevo, this->buscarAño(año));
+	else if (nodoAño != 0 && nodoMes != 0) {
+		nuevo = insertarMes(nuevo, nodoMes);
+		nuevo = insertarAño(nuevo, nodoAño);
+		return;
 	}
 }
 
@@ -135,13 +160,33 @@ void BibliotecaArtista::imprimir() {
 		NodoBiblio* temporal = this->raiz;
 		NodoBiblio* temporal2 = 0;
 		int numerador = 1;
-		while (temporal != 0) {
+		while (temporal != 0)
+		{
+			cout << temporal->año << endl;
+
 			temporal2 = temporal;
-			while (temporal2 != 0) {
+			while (temporal2 != 0)
+			{
 				cout << temporal->album->getNombre() << endl;
-				temporal2 = temporal->siguiente;
+				temporal2 = temporal2->siguiente;
 			}
+
 			temporal = temporal->abajo;
+		}
+	}
+}
+
+void BibliotecaArtista::mostrarI() {
+	if (this->raiz != 0) {
+		NodoBiblio* columna = this->raiz;
+		while (columna != 0) {
+			cout << columna->año << " " << columna->month << " " << columna->album->getNombre() << endl;
+			NodoBiblio* dato = columna->siguiente;
+			while (dato != 0) {
+				cout << "Name album: " << dato->album->getNombre() << endl;
+				dato = dato->siguiente;
+			}
+			columna = columna->abajo;
 		}
 	}
 }
@@ -151,14 +196,14 @@ void BibliotecaArtista::buscarAlbum(string nombre_album) {
 		cout << "No hay nada hecho por este artista :(, que sad." << endl;
 	}
 	else {
-		NodoBiblio* temporal = this->raiz;
+		NodoBiblio* temporal = this->raiz->abajo;
 		NodoBiblio* temporal2 = 0;
 		Cancion* canciones = 0;
 		while (temporal != 0) {
 			temporal2 = temporal;
 			while (temporal2 != 0) {
 				if (temporal->album->getNombre() == nombre_album) {
-					
+
 					//cout << temporal->album->getNombre();
 					canciones = temporal->album->getCanciones();
 					//representante->album = temporal->album;
@@ -177,5 +222,154 @@ void BibliotecaArtista::buscarAlbum(string nombre_album) {
 		cout << "Estas son las canciones del album que has elegido " << endl;
 		canciones->mostrarCancionesAlbum();
 		cout << "_----.----__----.----___----.----___----.----___----.----_" << endl;
+	}
+}
+
+void BibliotecaArtista::graficar() {
+
+	ofstream WriteFile("Discografia.dot");
+	WriteFile << "digraph discografia{" << endl;
+	WriteFile << "node [shape = rectangle]" << endl;
+	
+	bool vali = true;
+	int grupo = 1;
+
+	NodoBiblio* temporal1 = this->raiz;
+	NodoBiblio* temporal2 = this->raiz;
+	NodoBiblio* constante = this->raiz;
+	WriteFile << "x" << temporal1 << "[label = \"" << temporal1->month << "\", width = 1.5, group = 1];" << endl;
+	WriteFile << "e0[ shape = point, width = 0 ];" << endl;
+	WriteFile << "e1[ shape = point, width = 0 ];" << endl;
+
+	while (temporal1 != 0)
+	{
+		if (temporal1->arriba != 0) {
+			grupo = grupo + 1;
+			WriteFile << "x" << temporal1 << "[label = \"" << temporal1->month << "\", width = 1.5, group = 1];" << endl;
+		}
+
+		WriteFile << endl;
+		WriteFile << endl;
+		temporal1 = temporal1->abajo;
+	}
+	temporal1 = this->raiz;
+
+	while (temporal1 != 0) {
+		if (temporal1->abajo == 0) {
+			//WriteFile << "x" << temporal1 << "->x" << temporal1->arriba << endl;
+
+		}
+		else {
+			if (temporal1->arriba != 0) {
+
+				WriteFile << "x" << temporal1 << "->x" << temporal1->arriba << endl;
+			}
+			WriteFile << "x" << temporal1 << "->x" << temporal1->abajo << endl;
+		}
+		temporal1 = temporal1->abajo;
+	}
+
+
+	while (temporal2 != 0) {
+
+		if (temporal2->siguiente != 0 && temporal2->anterior == 0) {
+			WriteFile << "x" << temporal2 << "[label = \"" << temporal2->month << "\", width = 1.5, group = 1];" << endl;
+		}
+		else if (temporal2->siguiente != 0 && temporal2->anterior != 0) {
+			grupo = grupo + 1;
+			WriteFile << "x" << temporal2 << "[label = \"" << temporal2->año << "\", width = 1.5, group = " << grupo << "];" << endl;
+		}
+		temporal2 = temporal2->siguiente;
+	}
+	temporal2 = this->raiz;
+
+	while (temporal2 != 0) {
+
+		if (temporal2->siguiente == 0) {
+			WriteFile << "x" << temporal2 << "->x" << temporal2->anterior << endl;
+		}
+		else {
+
+			WriteFile << "x" << temporal2 << "->x" << temporal2->siguiente << endl;
+
+		}
+
+		temporal2 = temporal2->siguiente;
+	}
+
+	temporal2 = this->raiz;
+	string anidador = "";
+
+	WriteFile << "{rank = same; Root" << endl;
+	while (temporal2 != 0) {
+		WriteFile << "; x" << temporal2 << endl;
+		temporal2 = temporal2->siguiente;
+	}
+	WriteFile << "}" << endl << endl;
+
+	grupo = 0;
+	temporal1 = this->raiz;
+	while (temporal1 != 0) {
+		grupo = grupo + 1;
+		WriteFile << temporal1->album->getNombre() << "[label = \"" << temporal1->album->getNombre() << "\", group = " << grupo << "]" << endl;
+		temporal1 = temporal1->siguiente;
+	}
+	while (temporal2 != 0) {
+		WriteFile << temporal2->album->getNombre() << "[label = \"" << temporal2->album->getNombre() << "\", group = 1]" << endl;
+		temporal1 = temporal2->abajo;
+	}
+
+	temporal2 = this->raiz;
+	temporal1 = this->raiz;
+
+	while (temporal1 != 0) {
+		WriteFile << "x" << temporal1 << "-> " << temporal1->album->getNombre() << endl;
+		temporal1 = temporal1->siguiente;
+	}
+
+	while (temporal2 != 0) {
+		WriteFile << "x" << temporal2 << "-> " << temporal2->album->getNombre() << endl;
+		//WriteFile << "{rank = same; x" << temporal2 << "; " << temporal2->album->getNombre() << "}" << endl;
+		temporal2 = temporal2->abajo;
+	}
+	temporal2 = this->raiz;
+	while (temporal2 != 0) {
+		//WriteFile << "x" << temporal2 << "-> " << temporal2->album->getNombre() << endl;
+		WriteFile << "{rank = same; x" << temporal2 << "; " << temporal2->album->getNombre() << "}" << endl;
+		temporal2 = temporal2->abajo;
+	}
+
+	temporal2 = this->raiz;
+	temporal1 = this->raiz;
+
+
+
+	WriteFile << "}" << endl;
+	WriteFile.close();
+	system("dot -Tpng Discografia.dot -o Discografia.png");
+	system("Discografia.png");
+}
+
+bool BibliotecaArtista::buscarCancion(string album, string nombre) {
+	bool retorno = false;
+	if (this->raiz != 0) {
+		NodoBiblio* columna = this->raiz;
+		while (columna != 0)
+		{
+			NodoBiblio* dato = columna->siguiente;
+			while (dato != 0) 
+			{
+				if(album == dato->album->getNombre())
+				{
+					return true;
+				}
+				dato = dato->siguiente;
+			}
+			columna = columna->abajo;
+		}
+		return false;
+	}
+	else {
+		return false;
 	}
 }

@@ -1,0 +1,76 @@
+digraph discografia{
+node [shape = rectangle]
+x015663B8[label = "Root", width = 1.5, group = 1];
+e0[ shape = point, width = 0 ];
+e1[ shape = point, width = 0 ];
+
+
+x01571100[label = "Enero", width = 1.5, group = 1];
+
+
+x01571BD8[label = "Marzo", width = 1.5, group = 1];
+
+
+x01571EA8[label = "Abril", width = 1.5, group = 1];
+
+
+x01572458[label = "Mayo", width = 1.5, group = 1];
+
+
+x01572730[label = "Septiembre", width = 1.5, group = 1];
+
+
+x015663B8->x01571100
+x01571100->x015663B8
+x01571100->x01571BD8
+x01571BD8->x01571100
+x01571BD8->x01571EA8
+x01571EA8->x01571BD8
+x01571EA8->x01572458
+x01572458->x01571EA8
+x01572458->x01572730
+x015663B8[label = "Root", width = 1.5, group = 1];
+x015723F0[label = "2017", width = 1.5, group = 7];
+x01571DB8[label = "2018", width = 1.5, group = 8];
+x015712E0[label = "2019", width = 1.5, group = 9];
+x01571010[label = "2020", width = 1.5, group = 10];
+x015663B8->x015723F0
+x015723F0->x01571DB8
+x01571DB8->x015712E0
+x015712E0->x01571010
+x01571010->x01572798
+x01572798->x01571010
+{rank = same; Root
+; x015663B8
+; x015723F0
+; x01571DB8
+; x015712E0
+; x01571010
+; x01572798
+}
+
+[label = "", group = 1]
+Cuarto[label = "Cuarto", group = 2]
+Tercero[label = "Tercero", group = 3]
+Segundo[label = "Segundo", group = 4]
+Primero[label = "Primero", group = 5]
+Quinto[label = "Quinto", group = 6]
+x015663B8-> 
+x015723F0-> Cuarto
+x01571DB8-> Tercero
+x015712E0-> Segundo
+x01571010-> Primero
+x01572798-> Quinto
+x015663B8-> 
+x01571100-> Primero
+x01571BD8-> Segundo
+x01571EA8-> Tercero
+x01572458-> Cuarto
+x01572730-> Quinto
+{rank = same; x015663B8; }
+{rank = same; x01571100; Primero}
+{rank = same; x01571BD8; Segundo}
+{rank = same; x01571EA8; Tercero}
+{rank = same; x01572458; Cuarto}
+{rank = same; x01572730; Quinto}
+}

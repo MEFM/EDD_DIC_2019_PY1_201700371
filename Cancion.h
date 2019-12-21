@@ -108,6 +108,8 @@ public:
 	//Graficas, reportes (da lo mismo)
 	void mostrarCancionesAlbum();
 	void mostrarCancionesPlaylist();
+
+	bool confirmacionCancion(string);
 	
 
 };
